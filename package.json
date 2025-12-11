@@ -1,0 +1,32 @@
+{
+  "name": "covenant-cre-lander",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/partytown": "^2.1.4",
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource-variable/eb-garamond": "^5.2.7",
+    "@shoelace-style/shoelace": "^2.20.1",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.16.5",
+    "astro-icon": "^1.1.5",
+    "rollup-plugin-copy": "^3.5.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "prettier": "3.7.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-static-copy": "^3.1.4"
+  },
+  "volta": {
+    "node": "24.11.1"
+  }
+}

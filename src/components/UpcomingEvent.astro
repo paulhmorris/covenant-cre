@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+type Props = {
+  id: string | number;
+  date: string;
+  title: string;
+  imgSrc: string | ImageMetadata;
+  location: string;
+};
+
+const { id, date, title, imgSrc, location } = Astro.props;
+---
+
+<div class="flex aspect-square max-h-80 max-w-64 flex-col gap-y-2">
+  <div class="overflow-hidden rounded-md">
+    {
+      typeof imgSrc === "string" ? (
+        <img src={imgSrc} alt="" aria-hidden="true" class="size-full object-cover object-center" />
+      ) : (
+        <Image src={imgSrc} alt="" aria-hidden="true" class="size-full object-cover object-center" />
+      )
+    }
+  </div>
+  <p class="text-xl">
+    <span>{title} | </span>
+    <span>{location} | </span>
+    <span>{date}</span>
+  </p>
+</div>

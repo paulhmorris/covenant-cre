@@ -1,0 +1,91 @@
+---
+import "@fontsource-variable/eb-garamond";
+import { ClientRouter } from "astro:transitions";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Banner from "../components/Banner.astro";
+import "../global.css";
+import NewsletterForm from "../components/NewsletterForm.astro";
+
+type Props = {
+  headerBgColor: "bg-transparent" | "bg-brand-dark-grey";
+};
+const { headerBgColor = "bg-transparent" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="Upheld Ministries provides support and rest for parents of medically complex children through
+    Biblical truth, community connection, and various services."
+    />
+
+    <meta property="og:site_name" content="Upheld Ministries" />
+    <meta property="og:title" content="Upheld Ministries" />
+    <meta property="og:url" content="https://www.upheldministries.org" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta
+      property="og:description"
+      content="Upheld Ministries provides support and rest for parents of medically complex children through Biblical truth, community connection, and various services."
+    />
+
+    <link rel="icon" type="image/x-icon" media="(prefers-color-scheme: dark)" href="/favicon-dark-theme.png" />
+    <link rel="icon" type="image/x-icon" media="(prefers-color-scheme: light)" href="/favicon-light-theme.png" />
+    <link rel="canonical" href={Astro.url.toString()} />
+    <slot name="meta" />
+    <!-- Umami -->
+    <script
+      is:inline
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-domains="upheldministries.org"
+      data-website-id="c55d67c4-eb9c-416d-b2fb-72aad463bb41"></script>
+
+    <!-- Flodesk -->
+    <script is:inline>
+      (function (w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function () {
+          (w[n].q = w[n].q || []).push(arguments);
+        };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = "?v=" + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t);
+        sm.async = true;
+        sm.type = "module";
+        sm.src = h + s + ".mjs" + v;
+        f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t);
+        sn.async = true;
+        sn.noModule = true;
+        sn.src = h + s + ".js" + v;
+        f.parentNode.insertBefore(sn, f);
+      })(window, document, "script", "https://assets.flodesk.com", "/universal", "fd");
+    </script>
+    <ClientRouter />
+  </head>
+
+  <body class="text-brand-dark-grey flex h-full min-h-screen flex-col font-serif">
+    <Banner />
+    <Header
+      bgColor={headerBgColor}
+      invertTextColor={["/our-leadership", "/connect", "/events"].includes(Astro.url.pathname)}
+    />
+    <main class="h-full grow">
+      <slot />
+      <NewsletterForm />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  import "@shoelace-style/shoelace/dist/themes/light.css";
+</script>

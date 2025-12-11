@@ -1,0 +1,19 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+type Props = {
+  image: ImageMetadata;
+  name: string;
+  description: string;
+};
+const { image, name, description } = Astro.props;
+---
+
+<div class="mx-auto flex w-full max-w-[400px] flex-col items-start justify-between gap-y-4">
+  <Image src={image} alt={name} class="h-[475px] w-full object-cover object-top" />
+  <div>
+    <h2 class="text-xl font-semibold">{name}</h2>
+    <p class="text-base">{description}</p>
+  </div>
+</div>

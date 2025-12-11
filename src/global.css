@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-*: initial;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+
+  --color-brand-dark-grey: #313d41;
+  --color-brand-dark-teal: #476c77;
+  --color-brand-orange: #efb071;
+  --color-brand-blurple: #e0e2ed;
+
+  --font-serif: "EB Garamond Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-orpheus: "Orpheus Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer base {
+  @font-face {
+    font-family: "Orpheus";
+    src: url("/fonts/Orpheus.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Orpheus Pro";
+    src: url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.eot");
+    src:
+      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.eot?#iefix") format("embedded-opentype"),
+      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.woff2") format("woff2"),
+      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.woff") format("woff"),
+      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.ttf") format("truetype"),
+      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.svg#Orpheus Pro") format("svg");
+    font-weight: 300;
+  }
+
+  p {
+    @apply font-serif text-lg;
+  }
+
+  label {
+    @apply font-serif text-xl select-none;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    @apply h-[54px];
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    @apply focus:ring-brand-dark-teal w-full rounded-none border border-[#A9A9A9] bg-[#FAFAFA] px-4 py-2 ring-offset-white focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
+  }
+
+  label:has(input[type="checkbox"]) {
+    @apply flex items-center gap-x-2;
+  }
+
+  input[type="checkbox"] {
+    @apply text-brand-dark-grey size-4 rounded-none border border-[#A9A9A9] bg-[#FAFAFA];
+  }
+}

@@ -1,0 +1,24 @@
+---
+import ContentWrapper from "./ContentWrapper.astro";
+---
+
+<div class="br-curve bg-white">
+  <section class="bg-brand-blurple shrink-0 pb-64">
+    <ContentWrapper>
+      <div class="flex flex-col gap-12 px-6 md:flex-row md:justify-between md:gap-24 md:px-16">
+        <h2 class="font-orpheus flex-1 text-4xl font-light md:text-[80px] md:leading-none">We are here for you.</h2>
+        <p class="flex-1 text-2xl leading-relaxed">
+          We exist so that parents of medically complex children would know the hope and refuge available to them
+          through the Gospel. Our mission is to provide encouragement through Biblical truth, connection with other
+          parents, rest from responsibilities and support in their daily journey of caring for their children.
+        </p>
+      </div>
+    </ContentWrapper>
+  </section>
+</div>
+
+<style>
+  .br-curve {
+    clip-path: ellipse(175% 100% at 0% -3%);
+  }
+</style>

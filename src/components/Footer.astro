@@ -1,0 +1,45 @@
+---
+import ContentWrapper from "./ContentWrapper.astro";
+---
+
+<footer class="bg-brand-dark-teal mt-auto p-20">
+  <ContentWrapper>
+    <div class="flex flex-col gap-y-8 md:flex-row md:justify-between">
+      <div class="flex flex-col gap-y-4">
+        <p class="text-lg text-white">
+          Upheld Ministries is a 501(c)(3) organization {`© ${new Date().getFullYear()}`}
+        </p>
+        <a href="/donate" class="bg-brand-orange w-full px-7 py-2 text-center font-serif">Donate</a>
+      </div>
+
+      <nav>
+        <ul class="text-brand-orange flex flex-col gap-y-4 font-serif text-xl underline underline-offset-2">
+          <li class="text-center md:text-left"><a href="/our-story-and-vision">About</a></li>
+          <li class="text-center md:text-left"><a href="/services">Services</a></li>
+          <li class="text-center md:text-left"><a href="/connect">Connect</a></li>
+          <li class="text-center md:text-left"><a href="/events">Events</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="mt-20 flex justify-end gap-x-2 pr-2">
+      <a href="https://instagram.com/prayforlilygrace" target="_blank">
+        <span class="sr-only">Visit our Instagram</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          ><g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            ><path d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"></path><path
+              d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0m7.5-4.5v.01"></path></g
+          ></svg
+        >
+      </a>
+      <a href="https://www.facebook.com/groups/6253132531440120" target="_blank">
+        <span class="sr-only">Visit our Facebook group</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+          ><path
+            fill="white"
+            d="M18 2a1 1 0 0 1 .993.883L19 3v4a1 1 0 0 1-.883.993L18 8h-3v1h3a1 1 0 0 1 .991 1.131l-.02.112l-1 4a1 1 0 0 1-.858.75L17 15h-2v6a1 1 0 0 1-.883.993L14 22h-4a1 1 0 0 1-.993-.883L9 21v-6H7a1 1 0 0 1-.993-.883L6 14v-4a1 1 0 0 1 .883-.993L7 9h2V8a6 6 0 0 1 5.775-5.996L15 2z"
+          ></path></svg
+        >
+      </a>
+    </div>
+  </ContentWrapper>
+</footer>

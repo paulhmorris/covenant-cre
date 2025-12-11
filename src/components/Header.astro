@@ -1,0 +1,93 @@
+---
+type Props = {
+  invertTextColor: boolean;
+  bgColor: "bg-transparent" | "bg-brand-dark-grey";
+};
+const { invertTextColor, bgColor = "bg-transparent" } = Astro.props;
+const { pathname } = Astro.url;
+
+import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
+setBasePath("/shoelace-assets/");
+---
+
+<header
+  class={`z-50 flex h-28 shrink-0 items-center justify-between p-7 sm:px-14 ${invertTextColor ? "text-brand-dark-grey" : "text-white"} ${bgColor}`}
+>
+  <a href="/" class="font-orpheus z-10 text-lg font-light tracking-wide md:text-3xl">Upheld Ministries</a>
+  <!-- Desktop Nav -->
+  <nav class="z-10 hidden items-center gap-x-3 font-serif text-xl text-current md:flex" transition:name="navbar">
+    <div class="group relative -m-3 p-3">
+      <a
+        href="/our-story-and-vision"
+        class={`peer ${pathname === "/our-story-and-vision" ? "underline underline-offset-4 decoration-2" : ""}`}
+        >About</a
+      >
+      <div
+        class={`absolute top-10 hidden flex-col gap-2 whitespace-nowrap bg-brand-dark-grey px-3 py-4 peer-focus:flex peer-hover:flex text-white group-hover:flex`}
+      >
+        <a href="/our-story-and-vision">Our Story &amp; Vision</a>
+        <a href="/our-leadership">Our Leadership</a>
+      </div>
+    </div>
+    <a href="/services" class={pathname === "/services" ? "underline underline-offset-4 decoration-2" : ""}>Services</a>
+    <a href="/connect" class={pathname === "/connect" ? "underline underline-offset-4 decoration-2" : ""}>Connect</a>
+    <a href="/events" class={pathname === "/events" ? "underline underline-offset-4 decoration-2" : ""}>Events</a>
+  </nav>
+
+  <!-- Mobile Donate Link -->
+  <a
+    href="/donate"
+    class={`z-10 block ml-auto mr-8 rounded-md px-6 py-2 font-serif md:hidden ${invertTextColor ? "bg-brand-dark-grey text-white" : "bg-brand-orange text-brand-dark-grey"}`}
+    >Donate</a
+  >
+
+  <!-- Mobile Nav -->
+  <sl-drawer placement="bottom" class="drawer-placement-bottom" style="--size: 100dvh; z-index: 20;">
+    <nav class="z-20 size-full bg-white">
+      <ul class="text-brand-dark-grey z-20 flex h-full flex-col justify-center gap-y-4 font-serif text-3xl">
+        <li class="text-center"><a class="z-20" href="/our-story-and-vision">About</a></li>
+        <li class="text-center"><a class="z-20" href="/services">Services</a></li>
+        <li class="text-center"><a class="z-20" href="/connect">Connect</a></li>
+        <li class="text-center"><a class="z-20" href="/events">Events</a></li>
+        <li class="text-center"><a class="z-20" href="/donate">Donate</a></li>
+      </ul>
+    </nav>
+  </sl-drawer>
+  <sl-button class="md:hidden">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-10"
+      ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 8l16 0"></path><path d="M4 16l16 0"
+      ></path></svg
+    >
+  </sl-button>
+
+  <!-- Desktop Donate Link -->
+  <a
+    href="/donate"
+    class={`z-10 hidden rounded-md px-7 py-4 font-serif md:block ${invertTextColor ? "bg-brand-dark-grey text-white" : "bg-brand-orange text-brand-dark-grey"}`}
+    >Donate</a
+  >
+</header>
+
+<script>
+  import "@shoelace-style/shoelace/dist/components/drawer/drawer.js";
+  import type SlDrawer from "@shoelace-style/shoelace/dist/components/drawer/drawer.js";
+
+  document.addEventListener("astro:page-load", () => {
+    const drawer = document.querySelector(".drawer-placement-bottom") as SlDrawer;
+    const openButton = drawer.nextElementSibling as HTMLButtonElement;
+    const closeButton = drawer.querySelector('sl-button[variant="primary"]') as HTMLButtonElement;
+
+    openButton?.addEventListener("click", () => drawer.show());
+    closeButton?.addEventListener("click", () => drawer.hide());
+  });
+</script>
