@@ -9,9 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/partytown": "^2.1.4",
     "@astrojs/sitemap": "^3.6.0",
-    "@fontsource-variable/eb-garamond": "^5.2.7",
+    "@fontsource-variable/figtree": "^5.2.10",
     "@shoelace-style/shoelace": "^2.20.1",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.5",

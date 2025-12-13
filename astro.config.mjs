@@ -13,10 +13,7 @@ export default defineConfig({
   trailingSlash: "never",
   vite: {
     resolve: { alias: [{ find: /\/assets\/icons\/(.+)/, replacement: `${iconsPath}/$1` }] },
-    plugins: [
-      tailwindcss({ optimize: { minify: true } }),
-      viteStaticCopy({ targets: [{ src: iconsPath, dest: "assets" }] }),
-    ],
+    plugins: [tailwindcss(), viteStaticCopy({ targets: [{ src: iconsPath, dest: "assets" }] })],
   },
   integrations: [sitemap(), icon()],
 });

@@ -2,21 +2,15 @@
 @plugin "tailwindcss-animate";
 
 @theme {
-  --color-*: initial;
-  --color-white: #fff;
-  --color-black: #000;
-  --color-transparent: transparent;
-  --color-current: currentColor;
   --color-success: #28a745;
   --color-danger: #dc3545;
 
-  --color-brand-dark-grey: #313d41;
-  --color-brand-dark-teal: #476c77;
-  --color-brand-orange: #efb071;
-  --color-brand-blurple: #e0e2ed;
+  --color-brand-blue: #0c2340;
+  --color-brand-gold: #c6aa76;
 
-  --font-serif: "EB Garamond Variable", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-orpheus: "Orpheus Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans:
+    "Obvia", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
 /*
@@ -39,31 +33,19 @@
 
 @layer base {
   @font-face {
-    font-family: "Orpheus";
-    src: url("/fonts/Orpheus.woff") format("woff");
+    font-family: "Obvia";
+    src: url("/fonts/Obvia_Expanded_Medium.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
 
-  @font-face {
-    font-family: "Orpheus Pro";
-    src: url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.eot");
-    src:
-      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.eot?#iefix") format("embedded-opentype"),
-      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.woff2") format("woff2"),
-      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.woff") format("woff"),
-      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.ttf") format("truetype"),
-      url("https://db.onlinewebfonts.com/t/2aea0ac500c896188f9ad191c231029c.svg#Orpheus Pro") format("svg");
-    font-weight: 300;
-  }
-
   p {
-    @apply font-serif text-lg;
+    @apply text-lg;
   }
 
   label {
-    @apply font-serif text-xl select-none;
+    @apply text-xl select-none;
   }
 
   input[type="text"],
@@ -76,7 +58,7 @@
   input[type="email"],
   input[type="tel"],
   textarea {
-    @apply focus:ring-brand-dark-teal w-full rounded-none border border-[#A9A9A9] bg-[#FAFAFA] px-4 py-2 ring-offset-white focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
+    @apply focus:ring-brand-blue w-full rounded-none border border-[#A9A9A9] bg-[#FAFAFA] px-4 py-2 ring-offset-white focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
   }
 
   label:has(input[type="checkbox"]) {
@@ -84,6 +66,6 @@
   }
 
   input[type="checkbox"] {
-    @apply text-brand-dark-grey size-4 rounded-none border border-[#A9A9A9] bg-[#FAFAFA];
+    @apply size-4 rounded-none border border-[#A9A9A9] bg-[#FAFAFA] text-gray-600;
   }
 }
