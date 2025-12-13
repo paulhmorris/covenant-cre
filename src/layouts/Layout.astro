@@ -1,13 +1,9 @@
 ---
-import "@fontsource-variable/figtree";
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/inter";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../global.css";
-
-type Props = {
-  headerBgColor: "bg-transparent" | "bg-gray-600";
-};
-const { headerBgColor = "bg-transparent" } = Astro.props;
 ---
 
 <!doctype html>
@@ -40,7 +36,7 @@ const { headerBgColor = "bg-transparent" } = Astro.props;
     <!-- <Analytics /> -->
   </head>
 
-  <body class="flex h-full min-h-screen flex-col text-gray-600">
+  <body class="flex h-full min-h-screen flex-col text-gray-800">
     <Header />
     <main class="h-full grow">
       <slot />

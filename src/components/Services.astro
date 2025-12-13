@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-icon/components";
+
+const services = [
+  {
+    title: "Property Management",
+    description: "We maintain and oversee your commercial space with attention to detail.",
+    icon: "tabler:building",
+  },
+  {
+    title: "Leasing Services",
+    description: "Finding tenants who fit your property is our specialty.",
+    icon: "tabler:key",
+  },
+  {
+    title: "Tenant Support",
+    description: "We ensure smooth operations and resolve issues quickly",
+    icon: "tabler:heart-handshake",
+  },
+];
+---
+
+<section class="relative flex h-[calc(58vh-112px)] w-full shrink-0 flex-col items-center text-center">
+  <div class="max-w-3xl">
+    <h2 class="font-fraunces px-6 text-center text-balance sm:text-2xl md:text-3xl">What we do for your business</h2>
+    <p class="mt-4 text-pretty">
+      We handle the details so you can focus on what matters. From finding the right space to managing day-to-day
+      operations, we're here.
+    </p>
+  </div>
+
+  <div class="flex flex-wrap items-start justify-center gap-x-8">
+    {
+      services.map((service) => (
+        <div class="just mt-8 flex w-full flex-col items-center sm:w-[48%] lg:w-[30%]">
+          <div class="text-brand-blurple text-4xl">
+            <Icon name={service.icon} />
+          </div>
+          <h3 class="font-fraunces mt-4 text-3xl">{service.title}</h3>
+          <p class="mt-2 text-sm text-pretty">{service.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

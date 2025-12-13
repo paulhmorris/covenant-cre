@@ -1,13 +1,21 @@
 ---
 import ContentWrapper from "../components/ContentWrapper.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout headerBgColor="bg-transparent">
   <title slot="meta">Covenant CRE</title>
-  <section>
+  <section class="mt-20">
     <ContentWrapper>
-      <h1>Hello</h1>
+      <Hero />
+    </ContentWrapper>
+  </section>
+
+  <section class="mt-24">
+    <ContentWrapper>
+      <Services />
     </ContentWrapper>
   </section>
 </Layout>

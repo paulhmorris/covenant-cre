@@ -8,7 +8,6 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 const iconsPath = "node_modules/@shoelace-style/shoelace/dist/assets/icons";
 
 export default defineConfig({
-  prefetch: { prefetchAll: true },
   site: "https://covenantcre.com",
   trailingSlash: "never",
   vite: {

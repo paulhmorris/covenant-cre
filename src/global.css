@@ -8,8 +8,13 @@
   --color-brand-blue: #0c2340;
   --color-brand-gold: #c6aa76;
 
-  --font-sans:
+  --font-obvia:
     "Obvia", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-fraunces:
+    "Fraunces Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
 }
 
@@ -38,10 +43,6 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-  }
-
-  p {
-    @apply text-lg;
   }
 
   label {
