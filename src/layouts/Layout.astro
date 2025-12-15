@@ -7,7 +7,7 @@ import "../global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="min-h-screen">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,11 +17,12 @@ import "../global.css";
       content="Covenant CRE provides commercial real estate services in Rockwall, TX and surrounding areas."
     />
 
+    <meta name="robots" content="noindex" />
     <meta property="og:site_name" content="Covenant Commercial Real Estate" />
     <meta property="og:title" content="Covenant Commercial Real Estate" />
     <meta property="og:url" content="https://www.covenantcre.com" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="/og.png" />
     <meta
       property="og:description"
       content="Covenant CRE provides commercial real estate services in Rockwall, TX and surrounding areas."
@@ -34,11 +35,62 @@ import "../global.css";
     <link rel="canonical" href={Astro.url.toString()} />
     <slot name="meta" />
     <!-- <Analytics /> -->
+    <script>
+      import { animate } from "motion";
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const els = Array.from(document.querySelectorAll("[data-animate]"));
+
+        if (prefersReduced) {
+          els.forEach((el) => {
+            if (el instanceof HTMLElement) {
+              el.style.opacity = "1";
+              el.style.transform = "none";
+            }
+          });
+          return;
+        }
+
+        // set initial hidden state
+        els.forEach((el) => {
+          if (el instanceof HTMLElement) {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(8px)";
+          }
+        });
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target as HTMLElement;
+              const delayAttr = el.getAttribute("data-delay");
+              const delay = delayAttr ? parseFloat(delayAttr) : 0;
+              animate(
+                el,
+                { opacity: [0, 1], transform: ["translateY(8px)", "translateY(0px)"] },
+                { duration: 0.6, easing: "cubic-bezier(.2,.8,.2,1)", delay }
+              );
+              obs.unobserve(el);
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        els.forEach((el, i) => {
+          if (!el.hasAttribute("data-delay")) {
+            el.setAttribute("data-delay", String(i * 0.06));
+          }
+          observer.observe(el);
+        });
+      });
+    </script>
   </head>
 
-  <body class="flex h-full min-h-screen flex-col text-gray-800">
+  <body class="flex min-h-screen flex-col text-gray-800">
     <Header />
-    <main class="h-full grow">
+    <main class="mt-24 grow sm:mt-40">
       <slot />
     </main>
     <Footer />

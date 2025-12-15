@@ -8,9 +8,6 @@
   --color-brand-blue: #0c2340;
   --color-brand-gold: #c6aa76;
 
-  --font-obvia:
-    "Obvia", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
   --font-fraunces:
     "Fraunces Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-sans:
@@ -37,14 +34,6 @@
 }
 
 @layer base {
-  @font-face {
-    font-family: "Obvia";
-    src: url("/fonts/Obvia_Expanded_Medium.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   label {
     @apply text-xl select-none;
   }

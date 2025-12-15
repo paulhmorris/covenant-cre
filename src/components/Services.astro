@@ -20,24 +20,31 @@ const services = [
 ];
 ---
 
-<section class="relative flex h-[calc(58vh-112px)] w-full shrink-0 flex-col items-center text-center">
+<section class="relative flex w-full flex-col items-center pt-10 pb-20 text-center">
   <div class="max-w-3xl">
-    <h2 class="font-fraunces px-6 text-center text-balance sm:text-2xl md:text-3xl">What we do for your business</h2>
-    <p class="mt-4 text-pretty">
+    <h2 data-animate class="mb-4 text-sm font-bold">Services</h2>
+    <h3 data-animate data-delay="0.04" class="font-fraunces text-center text-4xl text-balance md:text-5xl">
+      What we do for your business
+    </h3>
+    <p data-animate data-delay="0.08" class="mt-4 text-sm text-pretty md:text-base">
       We handle the details so you can focus on what matters. From finding the right space to managing day-to-day
       operations, we're here.
     </p>
   </div>
 
-  <div class="flex flex-wrap items-start justify-center gap-x-8">
+  <div class="mt-8 flex flex-wrap items-start justify-center gap-x-8">
     {
-      services.map((service) => (
-        <div class="just mt-8 flex w-full flex-col items-center sm:w-[48%] lg:w-[30%]">
-          <div class="text-brand-blurple text-4xl">
+      services.map((service, i) => (
+        <div
+          data-animate
+          data-delay={0.48 + i * 0.06}
+          class="just mt-8 flex w-full flex-col items-center sm:w-[48%] lg:w-[30%]"
+        >
+          <div class="text-brand-gold text-4xl">
             <Icon name={service.icon} />
           </div>
-          <h3 class="font-fraunces mt-4 text-3xl">{service.title}</h3>
-          <p class="mt-2 text-sm text-pretty">{service.description}</p>
+          <h3 class="font-fraunces mt-5 text-3xl">{service.title}</h3>
+          <p class="mt-4 text-sm text-pretty">{service.description}</p>
         </div>
       ))
     }

@@ -1,11 +1,24 @@
-<section class="relative flex w-full shrink-0 flex-col items-center text-center">
+---
+import { Image } from "astro:assets";
+import hero from "../assets/images/hero.webp";
+---
+
+<section class="relative mt-10 flex w-full flex-col items-center gap-y-12 text-center md:mt-20">
   <div class="max-w-3xl">
-    <h1 class="font-fraunces px-6 text-center text-balance sm:text-3xl md:text-5xl">
+    <h1 data-animate class="font-fraunces text-center text-4xl text-balance md:text-7xl md:leading-20">
       Real estate built on integrity and respect
     </h1>
-    <p class="mt-6 text-pretty">
+    <p data-animate data-delay="0.08" class="mt-6 text-sm text-pretty md:text-lg">
       Covenant Commercial Real Estate helps local businesses find their place. We manage properties with care,
       understanding that every business deserves a space where it can grow.
     </p>
+  </div>
+  <div data-animate data-delay="0.16">
+    <Image
+      loading="eager"
+      src={hero}
+      class="w-full rounded-lg"
+      alt="A commercial real estate agent touring a property with prospective tenants"
+    />
   </div>
 </section>

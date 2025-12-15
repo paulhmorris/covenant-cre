@@ -7,17 +7,15 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout headerBgColor="bg-transparent">
   <title slot="meta">Covenant CRE</title>
-  <section class="mt-20">
-    <ContentWrapper>
-      <Hero />
-    </ContentWrapper>
-  </section>
+  <ContentWrapper>
+    <Hero />
+  </ContentWrapper>
 
-  <section class="mt-24">
+  <div class="mt-24 bg-gray-100 pt-8">
     <ContentWrapper>
       <Services />
     </ContentWrapper>
-  </section>
+  </div>
 </Layout>
 
 <style>
