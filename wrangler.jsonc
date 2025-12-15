@@ -1,6 +1,6 @@
 {
 	"main": "dist/_worker.js/index.js",
-	"name": "covenant-cre-lander",
+	"name": "covenant-cre",
   "compatibility_date": "2025-12-15",
   "compatibility_flags": [
     "nodejs_compat",
