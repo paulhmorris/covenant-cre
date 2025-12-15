@@ -4,6 +4,7 @@ import "@fontsource-variable/inter";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../global.css";
+import Analytics from "../components/Analytics.astro";
 ---
 
 <!doctype html>
@@ -34,7 +35,7 @@ import "../global.css";
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={Astro.url.toString()} />
     <slot name="meta" />
-    <!-- <Analytics /> -->
+    <Analytics />
     <script>
       import { animate } from "motion";
       const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
