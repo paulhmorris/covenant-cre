@@ -1,0 +1,74 @@
+---
+const team = [
+  {
+    name: "Michael Garrett",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+  {
+    name: "Patricia Chen",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+  {
+    name: "David Morrison",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+  {
+    name: "David Morrison",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+  {
+    name: "David Morrison",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+  {
+    name: "David Morrison",
+    jobTitle: "Founder",
+    email: "test@example.com",
+    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+  },
+];
+---
+
+<section class="relative flex w-full flex-col items-center pt-10 pb-20 text-center">
+  <div class="max-w-3xl">
+    <h2 data-animate class="mb-4 text-sm font-bold">Team</h2>
+    <h3 data-animate data-delay="0.04" class="font-fraunces text-center text-4xl text-balance md:text-5xl">
+      The people behind it
+    </h3>
+    <p data-animate data-delay="0.08" class="mt-4 text-sm text-balance md:text-base">
+      Real experience. Real relationships. Real commitment to your success.
+    </p>
+  </div>
+
+  <div class="mt-8 flex flex-wrap items-start justify-center gap-x-8">
+    {
+      team.map((t, i) => (
+        <div
+          data-animate
+          data-delay={0.48 + i * 0.06}
+          class="just mt-8 flex w-full flex-col items-center text-center sm:w-[48%] lg:w-[30%]"
+        >
+          {/* <Image /> */}
+          <div>
+            <img class="size-32 rounded-full object-contain" src="https://i.pravatar.cc/300" alt="" />
+          </div>
+          <h3 class="font-fraunces mt-5 text-3xl">{t.name}</h3>
+          <a class="hover:text-brand-gold text-sm" href={`mailto:${t.email}`}>
+            {t.email}
+          </a>
+          <p class="mt-4 text-sm text-balance">{t.bio}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

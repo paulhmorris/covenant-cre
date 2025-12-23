@@ -1,16 +1,13 @@
 {
-	"main": "dist/_worker.js/index.js",
-	"name": "covenant-cre-lander",
+  "main": "dist/_worker.js/index.js",
+  "name": "covenant-cre",
   "compatibility_date": "2025-12-15",
-  "compatibility_flags": [
-    "nodejs_compat",
-    "global_fetch_strictly_public"
-  ],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist"
-	},
-	"observability": {
-    "enabled": true
-  }
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+  },
+  "observability": {
+    "enabled": true,
+  },
 }
