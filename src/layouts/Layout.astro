@@ -70,6 +70,7 @@ import Analytics from "../components/Analytics.astro";
               const delay = delayAttr ? parseFloat(delayAttr) : 0;
               animate(
                 el,
+                // @ts-ignore
                 { opacity: [0, 1], transform: ["translateY(8px)", "translateY(0px)"] },
                 { duration: 0.6, easing: "cubic-bezier(.2,.8,.2,1)", delay }
               );

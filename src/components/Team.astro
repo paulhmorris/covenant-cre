@@ -1,40 +1,20 @@
 ---
+import { Image } from "astro:assets";
+import joe from "../assets/images/joe.jpeg";
+import stan from "../assets/images/stan.jpeg";
+
 const team = [
   {
-    name: "Michael Garrett",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+    name: "Stan Britton",
+    jobTitle: "Principal",
+    image: stan,
+    bio: "Experienced leader in real estate, sales, business development, operations and strategy.",
   },
   {
-    name: "Patricia Chen",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
-  },
-  {
-    name: "David Morrison",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
-  },
-  {
-    name: "David Morrison",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
-  },
-  {
-    name: "David Morrison",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
-  },
-  {
-    name: "David Morrison",
-    jobTitle: "Founder",
-    email: "test@example.com",
-    bio: "Twenty years managing commercial properties with a focus on doing right by people.",
+    name: "Joe Zylka",
+    jobTitle: "Principal",
+    image: joe,
+    bio: "Building enduring partnerships across capital and Real Estate.",
   },
 ];
 ---
@@ -58,14 +38,13 @@ const team = [
           data-delay={0.48 + i * 0.06}
           class="just mt-8 flex w-full flex-col items-center text-center sm:w-[48%] lg:w-[30%]"
         >
-          {/* <Image /> */}
-          <div>
-            <img class="size-32 rounded-full object-contain" src="https://i.pravatar.cc/300" alt="" />
-          </div>
+          <Image src={t.image} alt={t.name} class="size-32 rounded-full object-contain" />
           <h3 class="font-fraunces mt-5 text-3xl">{t.name}</h3>
-          <a class="hover:text-brand-gold text-sm" href={`mailto:${t.email}`}>
+          {/* 
+            <a class="hover:text-brand-gold text-sm" href={`mailto:${t.email}`}>
             {t.email}
           </a>
+          */}
           <p class="mt-4 text-sm text-balance">{t.bio}</p>
         </div>
       ))

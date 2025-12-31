@@ -4,17 +4,17 @@ import { Icon } from "astro-icon/components";
 const services = [
   {
     title: "Property Management",
-    description: "We maintain and oversee your commercial space with attention to detail.",
+    description: "Comprehensive management services to ensure your commercial properties operate smoothly and efficiently.",
     icon: "tabler:building",
   },
   {
-    title: "Leasing Services",
-    description: "Finding tenants who fit your property is our specialty.",
+    title: "Brokerage",
+    description: "Connecting you with the perfect commercial properties to meet your business needs.",
     icon: "tabler:key",
   },
   {
-    title: "Tenant Support",
-    description: "We ensure smooth operations and resolve issues quickly",
+    title: "Asset Management",
+    description: "Maximizing the value and performance of your real estate investments.",
     icon: "tabler:heart-handshake",
   },
 ];
@@ -38,7 +38,7 @@ const services = [
         <div
           data-animate
           data-delay={0.48 + i * 0.06}
-          class="just mt-8 flex w-full flex-col items-center sm:w-[48%] lg:w-[30%]"
+          class="mt-8 flex w-full flex-col items-center sm:w-[48%] lg:w-[30%]"
         >
           <div class="text-brand-gold text-4xl">
             <Icon name={service.icon} />
