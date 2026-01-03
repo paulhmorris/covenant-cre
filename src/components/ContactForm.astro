@@ -1,0 +1,95 @@
+<section class="relative flex w-full flex-col items-center pt-16 pb-20">
+  <div class="max-w-3xl text-center">
+    <h2 data-animate class="mb-4 text-sm font-bold">Contact</h2>
+    <h3 data-animate data-delay="0.04" class="font-fraunces text-4xl text-balance md:text-5xl">Let's work together</h3>
+    <p data-animate data-delay="0.08" class="mt-4 text-sm text-pretty md:text-base">
+      Have questions or want to learn more about our services? Reach out to us, and we'll get back to you promptly.
+    </p>
+  </div>
+
+  <form
+    data-animate
+    data-delay="0.48"
+    method="post"
+    id="contactForm"
+    enctype="application/x-www-form-urlencoded"
+    class="mt-8"
+  >
+    <input type="hidden" name="clientId" value="c2b161f8-0254-4929-add1-e36e3d672674" />
+    <div
+      class="cf-turnstile"
+      data-sitekey={import.meta.env.PUBLIC_CF_TURNSTILE_SITE_KEY}
+      data-callback="javascriptCallback"
+    >
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="mt-4 flex gap-4">
+        <label class="space-y-2" class="w-full">
+          First Name <span class="sr-only">(required)</span>
+          <input type="text" name="firstName" required maxlength={255} autocomplete="given-name" />
+        </label>
+        <label class="space-y-2" class="w-full">
+          Last Name <span class="sr-only">(required)</span>
+          <input type="text" name="lastName" required maxlength={255} autocomplete="family-name" />
+        </label>
+      </div>
+      <label class="space-y-2">
+        Email <span class="sr-only">(required)</span>
+        <input type="email" name="email" required maxlength={255} autocomplete="email" />
+      </label>
+      <button
+        type="submit"
+        class="bg-brand-blue hover:bg-brand-blue/85 border-brand-blue/50 w-full cursor-pointer rounded-md border px-12 py-3 tracking-wide text-white"
+        >Submit</button
+      >
+    </div>
+  </form>
+  <p id="formMessage" class="mt-4 text-sm"></p>
+</section>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+
+<script>
+  const formEl = document.getElementById("contactForm") as HTMLFormElement;
+  const formMsg = document.getElementById("formMessage") as HTMLSpanElement;
+
+  formEl.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const thisForm = event.target as HTMLFormElement;
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const messageElement = document.getElementById("formMessage") as HTMLParagraphElement;
+
+    if (!formData.has("cf-turnstile-response")) {
+      formMsg.textContent = "CAPTCHA failed. Please reload and try again.";
+      return;
+    }
+
+    if (!thisForm.checkValidity()) {
+      formMsg.textContent = "Please fill out all required fields.";
+      return;
+    }
+
+    try {
+      const response = await fetch(import.meta.env.PUBLIC_FORM_ENDPOINT, {
+        method: thisForm.method,
+        body: JSON.stringify(Object.fromEntries(formData)),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        messageElement.textContent = "Success! We'll get back to you shortly.";
+        messageElement.className = "mt-4";
+        formEl.reset();
+      } else {
+        messageElement.textContent = "Form submission failed. Please try again.";
+        messageElement.className = "text-danger mt-4";
+      }
+    } catch (error) {
+      messageElement.textContent = "Form submission failed. Please try again.";
+      messageElement.className = "text-danger mt-4";
+    }
+  });
+</script>

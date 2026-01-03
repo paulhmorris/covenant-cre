@@ -35,20 +35,14 @@
 
 @layer base {
   label {
-    @apply text-xl select-none;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"] {
-    @apply h-[54px];
+    @apply text-sm font-medium;
   }
 
   input[type="text"],
   input[type="email"],
   input[type="tel"],
   textarea {
-    @apply focus:ring-brand-blue w-full rounded-none border border-[#A9A9A9] bg-[#FAFAFA] px-4 py-2 ring-offset-white focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
+    @apply focus:ring-brand-blue border-brand-blue w-full rounded-lg border px-4 py-3 ring-offset-white focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
   }
 
   label:has(input[type="checkbox"]) {

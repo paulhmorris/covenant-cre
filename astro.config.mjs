@@ -19,5 +19,5 @@ export default defineConfig({
   },
 
   integrations: [sitemap(), icon()],
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: "compile" }),
 });
