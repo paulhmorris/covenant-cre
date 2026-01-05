@@ -1,13 +1,18 @@
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "main": "dist/_worker.js/index.js",
   "name": "covenant-cre",
   "compatibility_date": "2025-12-15",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "vars": {
+    "PUBLIC_FORM_ENDPOINT": "https://client-form-handler.fly.dev/api/v1/connect",
+    "PUBLIC_CF_TURNSTILE_SITE_KEY": "0x4AAAAAAA56f8edWXpKm9HG",
+  },
   "assets": {
     "binding": "ASSETS",
-    "directory": "./dist",
+    "directory": "./dist"
   },
   "observability": {
-    "enabled": true,
-  },
+    "enabled": true
+  }
 }
