@@ -10,9 +10,21 @@ import ContentWrapper from "./ContentWrapper.astro";
           <img src="/logo-full.svg" alt="Covenant Commercial Real Estate Logo" class="hidden size-36 sm:block" />
           <img src="/logo.svg" alt="Covenant Commercial Real Estate Logo" class="size-12 sm:hidden" />
         </div>
-        <p class="font-fraunces text-center md:text-left">
-          Covenant Commercial Real Estate {`© ${new Date().getFullYear()}`}
-        </p>
+        <div class="font-fraunces flex flex-col gap-y-2">
+          <p class="text-center md:text-left">
+            Covenant Commercial Real Estate {`© ${new Date().getFullYear()}`}
+          </p>
+          <a
+            class="underline decoration-2 underline-offset-2"
+            href="https://drive.google.com/file/d/1781HT1D0MXbLHTv3HvIYVcUl5bVQxD3E/view?usp=sharing"
+            target="_blank">Information About Brokerage Services</a
+          >
+          <a
+            class="underline decoration-2 underline-offset-2"
+            href="https://www.trec.texas.gov/sites/default/files/pdf-forms/CN%201-5_0.pdf"
+            target="_blank">Texas Real Estate Commission</a
+          >
+        </div>
       </div>
     </ContentWrapper>
   </div>
