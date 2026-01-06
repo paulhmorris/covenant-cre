@@ -1,5 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
+
+import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js";
+setBasePath("/shoelace-assets/");
 ---
 
 <header
@@ -13,16 +16,67 @@ import { Icon } from "astro-icon/components";
       </a>
     </div>
     <div>
-      <a
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
-        data-umami-event="clicked-client-login"
-        class="bg-brand-blue border-brand-blue/50 hover:bg-brand-blue/85 inline-flex items-center justify-center gap-x-2.5 rounded-lg border px-4 py-2 text-sm tracking-wide text-white"
-      >
-        <span>Client Login</span>
-        <Icon name="tabler:external-link" />
-      </a>
+      <sl-dropdown>
+        <button slot="trigger" class="cursor-pointer">
+          <Icon name="tabler:menu-2" class="size-8" } />
+          <span class="sr-only">Menu</span>
+        </button>
+        <sl-menu>
+          <!-- <sl-menu-item
+            ><a
+              class="flex items-center justify-between gap-x-2"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="clicked-client-login"
+            >
+              <span>Client Login</span>
+              <Icon name="tabler:external-link" />
+            </a></sl-menu-item
+          > -->
+          <sl-menu-item>
+            <a
+              class="flex items-center justify-between gap-x-2"
+              href="https://www.crexi.com/properties?searchBrokerId=01549d7a-1873-41e6-8acd-7f7f5c8cde1a"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="clicked-for-sale"
+            >
+              <span>For Sale</span>
+              <Icon name="tabler:external-link" />
+            </a>
+          </sl-menu-item>
+          <sl-menu-item
+            ><a
+              class="flex items-center justify-between gap-x-2"
+              href="https://www.crexi.com/lease/properties?searchBrokerId=01549d7a-1873-41e6-8acd-7f7f5c8cde1a"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="clicked-for-lease"
+            >
+              <span>For Lease</span>
+              <Icon name="tabler:external-link" />
+            </a>
+          </sl-menu-item>
+        </sl-menu>
+      </sl-dropdown>
     </div>
   </div>
 </header>
+
+<script>
+  import "@shoelace-style/shoelace/dist/components/button/button.js";
+  import "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js";
+  import type SlDropdown from "@shoelace-style/shoelace/dist/components/dropdown/dropdown.js";
+  import "@shoelace-style/shoelace/dist/components/menu-item/menu-item.js";
+  import "@shoelace-style/shoelace/dist/components/menu/menu.js";
+
+  const dropdown = document.querySelector(".drawer-placement-bottom") as SlDropdown;
+  const trigger = dropdown.nextElementSibling as HTMLButtonElement;
+  const closeButton = dropdown.querySelector('sl-button[variant="primary"]') as HTMLButtonElement;
+
+  console.log({ openButton: trigger, closeButton });
+
+  trigger?.addEventListener("click", () => dropdown.show());
+  closeButton?.addEventListener("click", () => dropdown.hide());
+</script>

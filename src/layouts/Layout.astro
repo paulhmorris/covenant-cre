@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import "../global.css";
 import Analytics from "../components/Analytics.astro";
+import "@shoelace-style/shoelace/dist/themes/light.css";
 ---
 
 <!doctype html>
@@ -88,6 +89,11 @@ import Analytics from "../components/Analytics.astro";
         });
       });
     </script>
+    <style>
+      :root {
+        --sl-font-sans: var(--font-sans);
+      }
+    </style>
   </head>
 
   <body class="flex min-h-screen flex-col text-gray-800">
