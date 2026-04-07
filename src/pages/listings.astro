@@ -1,8 +1,11 @@
 ---
+import ContentWrapper from "../components/ContentWrapper.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout headerBgColor="bg-transparent">
   <title slot="meta">Covenant CRE - Listings</title>
-  <iframe src="https://www.loopnet.com/looplink/search/?siteid=7196" width="100%" height="880"></iframe>
+  <ContentWrapper>
+    <iframe src="https://www.loopnet.com/looplink/search/?siteid=7196" width="100%" height="880"></iframe>
+  </ContentWrapper>
 </Layout>
