@@ -11,14 +11,14 @@
     "ngrok": "ngrok http --domain=legally-sterling-crayfish.ngrok-free.app 4321 --host-header localhost:4321"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/cloudflare": "^13.1.10",
     "@astrojs/sitemap": "^3.7.2",
     "@fontsource-variable/fraunces": "^5.2.9",
     "@fontsource-variable/inter": "^5.2.8",
     "@iconify-json/tabler": "^1.2.33",
     "@shoelace-style/shoelace": "^2.20.1",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^5.18.1",
+    "astro": "^6.1.8",
     "astro-icon": "^1.1.5",
     "motion": "^12.38.0",
     "rollup-plugin-copy": "^3.5.0",
