@@ -3,9 +3,26 @@ import ContentWrapper from "../components/ContentWrapper.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout headerBgColor="bg-transparent">
-  <title slot="meta">Covenant CRE - Listings</title>
+<Layout
+  headerBgColor="bg-transparent"
+  description="Browse commercial real estate listings from Covenant CRE in Rockwall, TX and the surrounding Dallas-Fort Worth area, including office, retail, and industrial space for lease or sale."
+  ogTitle="Commercial Real Estate Listings | Covenant CRE"
+>
+  <title slot="meta">Commercial Real Estate Listings | Covenant CRE</title>
+
   <ContentWrapper>
-    <iframe src="https://www.loopnet.com/looplink/search/?siteid=7196" width="100%" height="880"></iframe>
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 data-animate class="font-fraunces text-4xl text-balance md:text-5xl">Commercial Real Estate Listings</h1>
+      <p data-animate data-delay="0.06" class="mt-4 text-sm text-pretty md:text-base">
+        Explore available office, retail, and industrial properties for lease or sale in Rockwall, TX and the
+        surrounding Dallas-Fort Worth area. Our current inventory is updated regularly below.
+        <a href="/#contact" class="text-brand-blue hover:text-brand-gold font-semibold underline transition-colors">Contact us</a> if
+        you'd like help finding the right space for your business.
+      </p>
+    </div>
+
+    <div class="mt-8" data-animate data-delay="0.12">
+      <iframe src="https://www.loopnet.com/looplink/search/?siteid=7196" width="100%" height="880"></iframe>
+    </div>
   </ContentWrapper>
 </Layout>

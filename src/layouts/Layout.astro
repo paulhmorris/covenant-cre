@@ -6,6 +6,16 @@ import Header from "../components/Header.astro";
 import "../global.css";
 import Analytics from "../components/Analytics.astro";
 import "@shoelace-style/shoelace/dist/themes/light.css";
+
+interface Props {
+  headerBgColor?: string;
+  ogTitle?: string;
+  description?: string;
+}
+
+const defaultDescription =
+  "Covenant CRE provides commercial real estate services in Rockwall, TX and surrounding areas.";
+const { ogTitle = "Covenant Commercial Real Estate", description = defaultDescription } = Astro.props;
 ---
 
 <!doctype html>
@@ -14,20 +24,14 @@ import "@shoelace-style/shoelace/dist/themes/light.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Covenant CRE provides commercial real estate services in Rockwall, TX and surrounding areas."
-    />
+    <meta name="description" content={description} />
 
     <meta property="og:site_name" content="Covenant Commercial Real Estate" />
-    <meta property="og:title" content="Covenant Commercial Real Estate" />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:url" content="https://www.covenantcre.com" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/og.png" />
-    <meta
-      property="og:description"
-      content="Covenant CRE provides commercial real estate services in Rockwall, TX and surrounding areas."
-    />
+    <meta property="og:description" content={description} />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
