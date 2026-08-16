@@ -32,7 +32,7 @@ const facts = [
   lease ? listing.leaseDetails?.[0]?.leaseType : acres && `${acres} AC`,
   lease && vacancies > 1 && `${vacancies} spaces`,
   listing.propertyAttributes?.classType && `Class ${listing.propertyAttributes.classType}`,
-  listing.constructionYear && `Built ${listing.constructionYear}`,
+  listing.constructionYear?.built && `Built ${listing.constructionYear.built}`,
 ].filter(Boolean);
 ---
 

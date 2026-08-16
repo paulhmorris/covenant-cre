@@ -44,7 +44,7 @@ export interface SearchItem {
   }>;
   tenancy?: { tenancyType?: string };
   vacancyDetails?: { vacantUnitsCount?: number };
-  constructionYear?: number;
+  constructionYear?: { built?: number; renovated?: number };
   gallery: { imageCount: number; thumbnailUrls: string[] };
   listingAttributes: { status: string; dateActivated?: string };
   address: Array<{
