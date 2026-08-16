@@ -1,0 +1,205 @@
+---
+import ContentWrapper from "../../components/ContentWrapper.astro";
+import Layout from "../../layouts/Layout.astro";
+import { assetId, formatPrice, getAsset, getBrokers, getGallery, isLease, searchListings } from "../../lib/crexi";
+
+export async function getStaticPaths() {
+  const listings = await searchListings();
+  return listings.filter((listing) => !isLease(listing)).map((listing) => ({ params: { id: assetId(listing.id) } }));
+}
+
+const { id } = Astro.params;
+
+const [asset, gallery, brokers] = await Promise.all([getAsset(id), getGallery(id), getBrokers(id)]);
+
+if (!asset || asset.isPrivate) throw new Error(`Crexi asset ${id} could not be fetched at build time`);
+
+const images = (gallery ?? []).filter((item) => item.type === "Image");
+const hero = images[0]?.bigTnUrl ?? asset.thumbnailUrl;
+const location = asset.locations?.[0];
+const cityState = location ? `${location.city}, ${location.state.code} ${location.zip}` : null;
+const price = formatPrice(asset.askingPrice);
+const mapQuery = location ? encodeURIComponent(`${location.address}, ${cityState}`) : null;
+
+/** `details` is Crexi's own display-ready label/value map; price and address are shown above it. */
+const details = Object.entries(asset.details ?? {}).filter(([label]) => label !== "Asking Price");
+
+const title = `${asset.name} | Covenant CRE`;
+const description = asset.description ?? `${asset.types?.join(", ")} property for sale in ${cityState ?? "Texas"}.`;
+---
+
+<Layout headerBgColor="bg-transparent" description={description} ogTitle={asset.name}>
+  <title slot="meta">{title}</title>
+
+  <ContentWrapper>
+    <a
+      href="/listings"
+      class="text-brand-blue hover:text-brand-gold text-sm font-semibold transition-colors"
+      data-animate
+    >
+      ← All listings
+    </a>
+
+    <div class="mt-6 grid gap-10 pb-20 lg:grid-cols-3">
+      <div class="lg:col-span-2">
+        {
+          hero && (
+            <img
+              src={hero}
+              alt={asset.name}
+              data-animate
+              class="aspect-3/2 w-full rounded-lg object-cover"
+              fetchpriority="high"
+            />
+          )
+        }
+
+        {
+          images.length > 1 && (
+            <div data-animate data-delay="0.06" class="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4">
+              {images.slice(1, 9).map((image) => (
+                <a href={image.imageUrl} target="_blank" rel="noopener">
+                  <img
+                    src={image.smallTnUrl}
+                    alt=""
+                    loading="lazy"
+                    class="aspect-3/2 w-full rounded object-cover transition-opacity hover:opacity-80"
+                  />
+                </a>
+              ))}
+            </div>
+          )
+        }
+
+        <h1 data-animate data-delay="0.08" class="font-fraunces mt-8 text-3xl text-balance md:text-4xl">
+          {asset.name}
+        </h1>
+        {
+          asset.description && (
+            <p data-animate class="mt-2 text-base text-pretty text-gray-700">
+              {asset.description}
+            </p>
+          )
+        }
+
+        {
+          asset.marketingDescription && (
+            <div
+              data-animate
+              class="prose-listing mt-8 text-sm text-pretty text-gray-700"
+              set:html={asset.marketingDescription}
+            />
+          )
+        }
+
+        {
+          details.length > 0 && (
+            <>
+              <h2 data-animate class="font-fraunces mt-10 text-2xl">
+                Property details
+              </h2>
+              <dl data-animate class="border-brand-blue/15 mt-4 grid gap-x-8 border-t sm:grid-cols-2">
+                {details.map(([label, value]) => (
+                  <div class="border-brand-blue/15 flex justify-between gap-4 border-b py-3 text-sm">
+                    <dt class="text-gray-600">{label}</dt>
+                    <dd class="text-right font-semibold">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </>
+          )
+        }
+      </div>
+
+      <aside class="lg:sticky lg:top-44 lg:col-span-1 lg:self-start">
+        <div data-animate data-delay="0.12" class="border-brand-blue/15 rounded-lg border p-6">
+          <p class="text-brand-blue text-xs font-semibold tracking-wide uppercase">For Sale</p>
+          <p class="font-fraunces text-brand-blue mt-1 text-3xl">{price ?? "Price on request"}</p>
+          {
+            location && (
+              <p class="mt-3 text-sm text-gray-700">
+                {location.address}
+                <br />
+                {cityState}
+                {location.county && <span class="block text-xs text-gray-500">{location.county} County</span>}
+              </p>
+            )
+          }
+
+          {
+            asset.isInOpportunityZone && (
+              <p class="bg-brand-gold/15 text-brand-blue mt-4 rounded px-3 py-2 text-xs font-semibold">
+                Qualified Opportunity Zone
+              </p>
+            )
+          }
+
+          <a
+            href="/#contact"
+            class="bg-brand-blue hover:bg-brand-gold mt-6 block rounded px-4 py-3 text-center text-sm font-semibold text-white transition-colors"
+          >
+            Request more information
+          </a>
+
+          {
+            brokers && brokers.length > 0 && (
+              <div class="border-brand-blue/15 mt-6 border-t pt-6">
+                <p class="text-xs font-semibold tracking-wide text-gray-600 uppercase">Listing contacts</p>
+                <ul class="mt-4 space-y-4">
+                  {brokers.map((broker) => (
+                    <li class="flex items-center gap-3">
+                      {broker.thumbnailUrl && (
+                        <img
+                          src={broker.thumbnailUrl}
+                          alt=""
+                          loading="lazy"
+                          class="size-11 shrink-0 rounded-full object-cover"
+                        />
+                      )}
+                      <div class="text-sm">
+                        <p class="font-semibold">
+                          {broker.firstName} {broker.lastName}
+                        </p>
+                        {broker.licenseDetails?.[0]?.brokerTitle && (
+                          <p class="text-xs text-gray-600">{broker.licenseDetails[0].brokerTitle}</p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+
+        {
+          mapQuery && (
+            <iframe
+              data-animate
+              data-delay="0.18"
+              title={`Map of ${asset.name}`}
+              class="mt-6 aspect-square w-full rounded-lg border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src={`https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`}
+            />
+          )
+        }
+      </aside>
+    </div>
+  </ContentWrapper>
+</Layout>
+
+<style is:global>
+  .prose-listing p {
+    margin-bottom: 0.75rem;
+  }
+  .prose-listing ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-listing strong {
+    font-weight: 600;
+  }
+</style>
