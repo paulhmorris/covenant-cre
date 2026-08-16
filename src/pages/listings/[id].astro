@@ -111,8 +111,12 @@ const description = asset.description ?? `${asset.types?.join(", ")} property fo
         }
       </div>
 
-      <aside class="lg:sticky lg:top-44 lg:col-span-1 lg:self-start">
-        <div data-animate data-delay="0.12" class="border-brand-blue/15 rounded-lg border p-6">
+      <aside class="lg:sticky lg:top-44 lg:col-span-1 lg:flex lg:max-h-[calc(100dvh-13rem)] lg:flex-col lg:self-start">
+        <div
+          data-animate
+          data-delay="0.12"
+          class="border-brand-blue/15 rounded-lg border p-6 lg:min-h-0 lg:overflow-y-auto"
+        >
           <p class="text-brand-blue text-xs font-semibold tracking-wide uppercase">For Sale</p>
           <p class="font-fraunces text-brand-blue mt-1 text-3xl">{price ?? "Price on request"}</p>
           {
@@ -178,7 +182,7 @@ const description = asset.description ?? `${asset.types?.join(", ")} property fo
               data-animate
               data-delay="0.18"
               title={`Map of ${asset.name}`}
-              class="mt-6 aspect-square w-full rounded-lg border-0"
+              class="mt-6 aspect-square w-full rounded-lg border-0 lg:max-h-[38dvh] lg:shrink-0"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               src={`https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`}
