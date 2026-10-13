@@ -41,8 +41,10 @@ const { ogTitle = "Covenant Commercial Real Estate", description = defaultDescri
     <slot name="meta" />
     <Analytics />
     <script is:inline>
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const seenKey = `seen-animations:${location.pathname}`;
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem(seenKey)) {
         document.documentElement.classList.add("js-animate");
+        sessionStorage.setItem(seenKey, "1");
       }
     </script>
     <script>
