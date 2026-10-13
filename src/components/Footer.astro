@@ -1,5 +1,11 @@
 ---
 import ContentWrapper from "./ContentWrapper.astro";
+
+const offices = [
+  { city: "Rockwall", address: "209 Interstate 30 East, Rockwall 75087" },
+  { city: "Midland", address: "125 W Missouri, Midland 79701" },
+  { city: "Abilene", address: "317 N Willis, Abilene 79603" },
+];
 ---
 
 <footer class="w-full max-w-7xl self-center p-6 text-gray-800 md:p-12" data-animate data-delay="0.40">
@@ -11,13 +17,24 @@ import ContentWrapper from "./ContentWrapper.astro";
           <img src="/logo.svg" alt="Covenant Commercial Real Estate Logo" class="size-12 sm:hidden" />
         </div>
         <address class="font-fraunces flex flex-col items-center gap-y-2 not-italic md:items-start">
-          <a
-            class="underline decoration-2 underline-offset-2"
-            href="https://maps.google.com/?q=209+I-30+Rockwall+TX+75087"
-            target="_blank">209 I-30 Rockwall, TX 75087</a
-          >
+          {
+            offices.map(({ city, address }) => (
+              <p class="text-center md:text-left">
+                <span class="font-semibold">{city}</span> -{" "}
+                <a
+                  class="underline decoration-2 underline-offset-2"
+                  href={`https://maps.google.com/?q=${encodeURIComponent(`${address} TX`)}`}
+                  target="_blank"
+                >
+                  {address}
+                </a>
+              </p>
+            ))
+          }
           <a class="underline decoration-2 underline-offset-2" href="tel:+14696985609">469-698-5609</a>
-          <a class="underline decoration-2 underline-offset-2" href="mailto:info@covenantcre.com">Info@covenantcre.com</a>
+          <a class="underline decoration-2 underline-offset-2" href="mailto:info@covenantcre.com"
+            >Info@covenantcre.com</a
+          >
         </address>
         <div class="font-fraunces flex flex-col gap-y-2">
           <p class="text-center md:text-left">
