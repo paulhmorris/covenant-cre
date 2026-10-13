@@ -40,30 +40,20 @@ const { ogTitle = "Covenant Commercial Real Estate", description = defaultDescri
     <link rel="canonical" href={Astro.url.toString()} />
     <slot name="meta" />
     <Analytics />
+    <script is:inline>
+      const seenKey = `seen-animations:${location.pathname}`;
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem(seenKey)) {
+        document.documentElement.classList.add("js-animate");
+        sessionStorage.setItem(seenKey, "1");
+      }
+    </script>
     <script>
       import { animate } from "motion";
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       document.addEventListener("DOMContentLoaded", () => {
+        if (!document.documentElement.classList.contains("js-animate")) return;
+
         const els = Array.from(document.querySelectorAll("[data-animate]"));
-
-        if (prefersReduced) {
-          els.forEach((el) => {
-            if (el instanceof HTMLElement) {
-              el.style.opacity = "1";
-              el.style.transform = "none";
-            }
-          });
-          return;
-        }
-
-        // set initial hidden state
-        els.forEach((el) => {
-          if (el instanceof HTMLElement) {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(8px)";
-          }
-        });
 
         const observer = new IntersectionObserver(
           (entries, obs) => {

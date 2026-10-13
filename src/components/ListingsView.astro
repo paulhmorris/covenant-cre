@@ -1,0 +1,144 @@
+---
+import ContentWrapper from "../components/ContentWrapper.astro";
+import ListingCard from "../components/ListingCard.astro";
+import Layout from "../layouts/Layout.astro";
+import { PAGE_SIZE, isLease, searchListings, type SearchItem } from "../lib/crexi";
+
+interface Props {
+  filter: "all" | "sale" | "lease";
+  page?: number;
+}
+
+const { filter, page = 1 } = Astro.props;
+
+const all = await searchListings();
+const matches = (listing: SearchItem) => filter === "all" || (filter === "lease") === isLease(listing);
+const listings = all.filter(matches);
+
+const totalPages = Math.max(1, Math.ceil(listings.length / PAGE_SIZE));
+const pageListings = listings.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+const tabs = [
+  { label: "All", value: "all", href: "/listings" },
+  { label: "For Sale", value: "sale", href: "/listings/for-sale" },
+  { label: "For Lease", value: "lease", href: "/listings/for-lease" },
+] as const;
+
+const basePath = tabs.find((tab) => tab.value === filter)!.href;
+const pageHref = (n: number) => (n === 1 ? basePath : `${basePath}/page/${n}`);
+
+const copy = {
+  all: {
+    heading: "Commercial Real Estate Listings",
+    intro:
+      "Explore available office, retail, industrial, and land properties for sale or lease in Rockwall, TX and the surrounding Dallas-Fort Worth area.",
+    description:
+      "Browse commercial real estate listings from Covenant CRE in Rockwall, TX and the surrounding Dallas-Fort Worth area, including office, retail, industrial, and land for sale or lease.",
+  },
+  sale: {
+    heading: "Commercial Property For Sale",
+    intro:
+      "Office, retail, industrial, and land investment opportunities for sale in Rockwall, TX and the surrounding Dallas-Fort Worth area.",
+    description:
+      "Commercial property for sale in Rockwall, TX and the Dallas-Fort Worth area — office, retail, industrial, and land listings from Covenant CRE.",
+  },
+  lease: {
+    heading: "Commercial Space For Lease",
+    intro:
+      "Office, retail, and industrial space available for lease in Rockwall, TX and the surrounding Dallas-Fort Worth area.",
+    description:
+      "Commercial space for lease in Rockwall, TX and the Dallas-Fort Worth area — office, retail, and industrial availabilities from Covenant CRE.",
+  },
+}[filter];
+
+const pageSuffix = page > 1 ? ` — Page ${page}` : "";
+const title = `${copy.heading}${pageSuffix} | Covenant CRE`;
+---
+
+<Layout headerBgColor="bg-transparent" description={copy.description} ogTitle={`${copy.heading} | Covenant CRE`}>
+  <title slot="meta">{title}</title>
+  {page > 1 && <link slot="meta" rel="prev" href={pageHref(page - 1)} />}
+  {page < totalPages && <link slot="meta" rel="next" href={pageHref(page + 1)} />}
+
+  <ContentWrapper>
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 data-animate class="font-fraunces text-4xl text-balance md:text-5xl">{copy.heading}</h1>
+      <p data-animate data-delay="0.06" class="mt-4 text-sm text-pretty md:text-base">
+        {copy.intro}
+        <a href="/#contact" class="text-brand-blue hover:text-brand-gold font-semibold underline transition-colors"
+          >Contact us</a
+        > if you'd like help finding the right space for your business.
+      </p>
+    </div>
+
+    {
+      listings.length > 0 ? (
+        <>
+          <div data-animate data-delay="0.1" class="mt-10 flex flex-wrap items-center justify-between gap-4">
+            <p class="text-sm text-gray-600">
+              {listings.length} {listings.length === 1 ? "listing" : "listings"}
+              {totalPages > 1 && ` — page ${page} of ${totalPages}`}
+            </p>
+            <nav class="flex gap-2" aria-label="Filter listings">
+              {tabs.map((tab) => (
+                <a
+                  href={tab.href}
+                  aria-current={tab.value === filter ? "page" : undefined}
+                  class="border-brand-blue/20 text-brand-blue hover:border-brand-gold aria-[current]:bg-brand-blue rounded border px-3 py-2 text-xs font-semibold tracking-wide transition-colors aria-[current]:text-white"
+                >
+                  {tab.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {pageListings.map((listing, i) => (
+              <ListingCard listing={listing} index={i} />
+            ))}
+          </div>
+
+          {totalPages > 1 && (
+            <nav class="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
+              <a
+                href={pageHref(page - 1)}
+                aria-disabled={page === 1}
+                class="border-brand-blue/20 text-brand-blue hover:border-brand-gold rounded border px-3 py-2 text-xs font-semibold transition-colors aria-disabled:pointer-events-none aria-disabled:opacity-40"
+              >
+                ← Prev
+              </a>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <a
+                  href={pageHref(n)}
+                  aria-current={n === page ? "page" : undefined}
+                  class="border-brand-blue/20 text-brand-blue hover:border-brand-gold aria-[current]:bg-brand-blue min-w-9 rounded border px-3 py-2 text-center text-xs font-semibold transition-colors aria-[current]:text-white"
+                >
+                  {n}
+                </a>
+              ))}
+              <a
+                href={pageHref(page + 1)}
+                aria-disabled={page === totalPages}
+                class="border-brand-blue/20 text-brand-blue hover:border-brand-gold rounded border px-3 py-2 text-xs font-semibold transition-colors aria-disabled:pointer-events-none aria-disabled:opacity-40"
+              >
+                Next →
+              </a>
+            </nav>
+          )}
+
+          <div class="pb-20" />
+        </>
+      ) : (
+        <div class="border-brand-blue/15 mx-auto mt-10 mb-20 max-w-xl rounded-lg border p-8 text-center">
+          <p class="text-sm text-pretty text-gray-700">
+            No listings to show right now. Please{" "}
+            <a href="/#contact" class="text-brand-blue hover:text-brand-gold font-semibold underline transition-colors">
+              contact us
+            </a>{" "}
+            and we'll send you our current inventory.
+          </p>
+        </div>
+      )
+    }
+  </ContentWrapper>
+</Layout>

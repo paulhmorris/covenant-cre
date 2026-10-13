@@ -53,3 +53,11 @@
     @apply size-4 rounded-none border border-[#A9A9A9] bg-[#FAFAFA] text-gray-600;
   }
 }
+
+/* Set by an inline head script before first paint, so reveal targets never flash visible. */
+@layer base {
+  html.js-animate [data-animate] {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

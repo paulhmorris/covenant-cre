@@ -1,0 +1,14 @@
+---
+import ListingsView from "../../../components/ListingsView.astro";
+import { PAGE_SIZE, isLease, searchListings } from "../../../lib/crexi";
+
+export async function getStaticPaths() {
+  const listings = (await searchListings()).filter(() => true);
+  const totalPages = Math.ceil(listings.length / PAGE_SIZE);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({ params: { page: String(i + 2) } }));
+}
+
+const page = Number(Astro.params.page);
+---
+
+<ListingsView filter="all" page={page} />

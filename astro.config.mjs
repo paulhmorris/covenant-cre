@@ -12,6 +12,9 @@ export default defineConfig({
   site: "https://covenantcre.com",
   trailingSlash: "never",
   devToolbar: { enabled: false },
+  prefetch: {
+    defaultStrategy: "hover"
+  },
 
   vite: {
     resolve: { alias: [{ find: /\/assets\/icons\/(.+)/, replacement: `${iconsPath}/$1` }] },
